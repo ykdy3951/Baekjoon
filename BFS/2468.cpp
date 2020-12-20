@@ -1,0 +1,82 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n;
+int arr[101][101];
+int answer;
+bool vst[101][101] = {
+    false,
+};
+int dx[4] = {1, -1, 0, 0};
+int dy[4] = {0, 0, 1, -1};
+int Max;
+queue<pair<int, int>> q;
+
+void bfs(int depth)
+{
+    while (!q.empty())
+    {
+        int x = q.front().first, y = q.front().second;
+        q.pop();
+        for (int i = 0; i < 4; i++)
+        {
+            int nx = x + dx[i], ny = y + dy[i];
+            if (1 <= nx && nx <= n && 1 <= ny && ny <= n && !vst[nx][ny])
+            {
+                if (arr[nx][ny] > depth)
+                {
+                    vst[nx][ny] = true;
+                    q.push({nx, ny});
+                }
+            }
+        }
+    }
+}
+
+void init()
+{
+    cin >> n;
+
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= n; j++)
+        {
+            int num;
+            cin >> num;
+            arr[i][j] = num;
+            Max = max(Max, num);
+        }
+    }
+}
+
+int main(void)
+{
+
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+
+    init();
+
+    for (int d = 0; d <= Max; d++)
+    {
+        int t = 0;
+        memset(vst, 0, sizeof(vst));
+        for (int i = 1; i <= n; i++)
+        {
+            for (int j = 1; j <= n; j++)
+            {
+                if (arr[i][j] > d && !vst[i][j])
+                {
+                    q.push({i, j});
+                    vst[i][j] = true;
+                    t++;
+                    bfs(d);
+                }
+            }
+        }
+        answer = max(answer, t);
+    }
+    cout << answer << endl;
+    return 0;
+}
