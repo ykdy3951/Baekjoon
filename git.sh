@@ -1,3 +1,5 @@
-git add $1.cpp
+AGR2=${2:-cpp}
+
+git add $1.$AGR2
 git commit -m "boj $1"
 git push origin master
