@@ -26,6 +26,7 @@ using namespace std;
 #define pd2(a, b) printf("%d %d", a, b)
 #define pnd2(a, b) printf("%d %d\n", a, b)
 #define st(v) sort(v.begin(), v.end())
+#define vt vector
 #define pr pair
 #define pb push_back
 #define f(i, a, b) for (i = a; i < b; i++)
