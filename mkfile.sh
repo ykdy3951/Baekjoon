@@ -29,7 +29,7 @@ using namespace std;
 #define vt vector
 #define pr pair
 #define pb push_back
-#define f(i, a, b) for (i = a; i < b; i++)
+#define f(i, a, b) for (int i = a; i < b; i++)
 
 
 void init()
