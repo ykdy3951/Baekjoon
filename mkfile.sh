@@ -30,7 +30,7 @@ using namespace std;
 #define pr pair
 #define pb push_back
 #define f(i, a, b) for (int i = a; i < b; i++)
-
+#define fe(i, a, b) for (int i = a; i <= b; i++)
 
 void init()
 {
