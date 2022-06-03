@@ -34,7 +34,7 @@ using namespace std;
 int n;
 vt<int> v[1001];
 int dist[1001];
-int data[1001];
+int G[1001];
 int ans;
 
 bool chk[1001];
@@ -47,7 +47,7 @@ void init()
     sd1(n);
 
     fe(i, 1, n) {
-        sd1(data[i]);
+        sd1(G[i]);
         sd1(m);
         while(m--) {
             int tmp;
@@ -70,10 +70,10 @@ void solve()
         
         if(chk[now]) continue;
         chk[now] = true;
-        ans = max(ans, w + data[now]);
+        ans = max(ans, w + G[now]);
 
         for(int i : v[now]) {
-            int nw = data[now] + w;
+            int nw = G[now] + w;
 
             if(nw >= dist[i]) continue;
 
