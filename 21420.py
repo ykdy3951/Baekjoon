@@ -1,0 +1,1 @@
+l=list(map(int,open(0)));print(min(l[0]*2-sum(l),sum(l)-l[0]))
