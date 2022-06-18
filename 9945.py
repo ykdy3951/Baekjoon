@@ -10,4 +10,4 @@ while(True):
     for _ in range(int(n)):
         i,j,k=map(int,input().split())
         x+=i*k;y+=j*k;s+=k
-    print('Case %d: %f %f' %(a, round(x/s,2), round(y/s,2)))
+    print('Case %d: %.2f %.2f' %(a, round(x/s,2), round(y/s,2)))
