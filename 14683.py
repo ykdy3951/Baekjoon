@@ -1,0 +1,5 @@
+a,b=map(int,input().split())
+i,j=map(int,input().split())
+k=int(input())
+n=abs(a-i)+abs(b-j)
+print('Y' if k-n>=0 and (k-n)%2==0 else 'N')
