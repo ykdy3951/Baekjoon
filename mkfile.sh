@@ -32,11 +32,11 @@ using namespace std;
 #define f(i, a, b) for (int i = a; i < b; i++)
 #define fe(i, a, b) for (int i = a; i <= b; i++)
 
-void init()
+void solve()
 {
 }
 
-void solve()
+void init()
 {
 }
 
