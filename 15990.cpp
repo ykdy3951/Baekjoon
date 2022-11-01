@@ -32,42 +32,30 @@ using namespace std;
 #define f(i, a, b) for (int i = a; i < b; i++)
 #define fe(i, a, b) for (int i = a; i <= b; i++)
 
-int n, m, ans = INF;
-int arr[8][8];
+#define MOD 1000000009
+ll dp[100005][4] = {{0,0,0,0}, {0,1,0,0}, {0,0,1,0}, {0,1,1,1}};
+int n;
 
-const int dy[3]={-1,0,1};
-
-void solve(int x, int y, int direction, int ret)
+void solve()
 {
-    if (x == n) {
-        ans=min(ans,ret);
-        return;
-    }
-
-    f(i,0,3)
+    fe(i,4,100000)
     {
-        int nx=x+1, ny=y+dy[i], nd=i;
-        if(y < 0 || y >= m) continue;
-        if(direction == nd) continue;
-
-        solve(nx,ny,nd,arr[x][y]+ret);
+        dp[i][1]=(dp[i-1][2]+dp[i-1][3])%MOD;
+        dp[i][2]=(dp[i-2][1]+dp[i-2][3])%MOD;
+        dp[i][3]=(dp[i-3][1]+dp[i-3][2])%MOD;
     }
 }
 
 void init()
 {
-    sd2(n,m);
-    f(i,0,n)
+    sd1(n);
+    solve();
+    while(n--)
     {
-        f(j,0,m)
-        {
-            sd1(arr[i][j]);
-        }
+        int num;
+        sd1(num);
+        pnlld1((dp[num][1]+dp[num][2]+dp[num][3])%MOD);
     }
-    
-    f(i,0,m)
-        solve(0,i,-1,0);
-    pnd1(ans);
 }
 
 int main(void)

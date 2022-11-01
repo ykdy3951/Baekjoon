@@ -32,46 +32,36 @@ using namespace std;
 #define f(i, a, b) for (int i = a; i < b; i++)
 #define fe(i, a, b) for (int i = a; i <= b; i++)
 
-int n, m, ans = INF;
-int arr[8][8];
+int dp[501][501];
+int n, m;
 
-const int dy[3]={-1,0,1};
-
-void solve(int x, int y, int direction, int ret)
+void solve()
 {
-    if (x == n) {
-        ans=min(ans,ret);
-        return;
-    }
-
-    f(i,0,3)
+    fe(i,1,n)
     {
-        int nx=x+1, ny=y+dy[i], nd=i;
-        if(y < 0 || y >= m) continue;
-        if(direction == nd) continue;
-
-        solve(nx,ny,nd,arr[x][y]+ret);
+        fe(j,1,m)
+        {
+            dp[i][j]+=max(dp[i-1][j-1],max(dp[i-1][j],dp[i-1][j+1]));
+        }
     }
+    pnd1(*max_element(dp[n]+1,dp[n]+m+1));
 }
 
 void init()
 {
     sd2(n,m);
-    f(i,0,n)
+    fe(i,1,n)
     {
-        f(j,0,m)
+        fe(j,1,m)
         {
-            sd1(arr[i][j]);
+            sd1(dp[i][j]);
         }
     }
-    
-    f(i,0,m)
-        solve(0,i,-1,0);
-    pnd1(ans);
 }
 
 int main(void)
 {
     init();
+    solve();
     return 0;
 }

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
 
@@ -32,46 +33,41 @@ using namespace std;
 #define f(i, a, b) for (int i = a; i < b; i++)
 #define fe(i, a, b) for (int i = a; i <= b; i++)
 
-int n, m, ans = INF;
-int arr[8][8];
+int n;
+vt<int> arr;
+vt<int> dp;
 
-const int dy[3]={-1,0,1};
-
-void solve(int x, int y, int direction, int ret)
+void solve()
 {
-    if (x == n) {
-        ans=min(ans,ret);
-        return;
-    }
-
-    f(i,0,3)
+    f(i,1,n)
     {
-        int nx=x+1, ny=y+dy[i], nd=i;
-        if(y < 0 || y >= m) continue;
-        if(direction == nd) continue;
-
-        solve(nx,ny,nd,arr[x][y]+ret);
+        if(dp.back() < -arr[i])
+        {
+            dp.pb(-arr[i]);
+            continue;
+        }
+        auto it = lower_bound(dp.begin(), dp.end(), -arr[i]);
+        *it = -arr[i];
     }
+
+    pnd1(dp.size());
 }
 
 void init()
 {
-    sd2(n,m);
+    sd1(n);
     f(i,0,n)
     {
-        f(j,0,m)
-        {
-            sd1(arr[i][j]);
-        }
+        int num;
+        sd1(num);
+        arr.pb(num);
     }
-    
-    f(i,0,m)
-        solve(0,i,-1,0);
-    pnd1(ans);
+    dp.pb(-arr[0]);
 }
 
 int main(void)
 {
     init();
+    solve();
     return 0;
 }

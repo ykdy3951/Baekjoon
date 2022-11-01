@@ -32,42 +32,26 @@ using namespace std;
 #define f(i, a, b) for (int i = a; i < b; i++)
 #define fe(i, a, b) for (int i = a; i <= b; i++)
 
-int n, m, ans = INF;
-int arr[8][8];
+#define MOD 1000000009
 
-const int dy[3]={-1,0,1};
+ll arr[1000005] = {0, 1, 2, 4, };
+int n;
 
-void solve(int x, int y, int direction, int ret)
+ll solve(int n)
 {
-    if (x == n) {
-        ans=min(ans,ret);
-        return;
-    }
-
-    f(i,0,3)
-    {
-        int nx=x+1, ny=y+dy[i], nd=i;
-        if(y < 0 || y >= m) continue;
-        if(direction == nd) continue;
-
-        solve(nx,ny,nd,arr[x][y]+ret);
-    }
+    if (arr[n]) return arr[n];
+    return arr[n]=(solve(n-1)+solve(n-2)+solve(n-3))%MOD;
 }
 
 void init()
 {
-    sd2(n,m);
-    f(i,0,n)
+    sd1(n);
+    while(n--)
     {
-        f(j,0,m)
-        {
-            sd1(arr[i][j]);
-        }
+        int a;
+        sd1(a);
+        pnlld1(solve(a));
     }
-    
-    f(i,0,m)
-        solve(0,i,-1,0);
-    pnd1(ans);
 }
 
 int main(void)

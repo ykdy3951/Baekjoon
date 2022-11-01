@@ -32,46 +32,27 @@ using namespace std;
 #define f(i, a, b) for (int i = a; i < b; i++)
 #define fe(i, a, b) for (int i = a; i <= b; i++)
 
-int n, m, ans = INF;
-int arr[8][8];
+int arr[20][20];
+int n;
 
-const int dy[3]={-1,0,1};
-
-void solve(int x, int y, int direction, int ret)
+int solve(int x, int y)
 {
-    if (x == n) {
-        ans=min(ans,ret);
-        return;
-    }
-
-    f(i,0,3)
-    {
-        int nx=x+1, ny=y+dy[i], nd=i;
-        if(y < 0 || y >= m) continue;
-        if(direction == nd) continue;
-
-        solve(nx,ny,nd,arr[x][y]+ret);
-    }
+    if (arr[x][y]) return arr[x][y];
+    return arr[x][y]=solve(x-1,y)+solve(x,y-1);
 }
 
 void init()
 {
-    sd2(n,m);
-    f(i,0,n)
-    {
-        f(j,0,m)
-        {
-            sd1(arr[i][j]);
-        }
+    sd1(n);
+    f(i,0,20) {
+        arr[i][0]=arr[0][i]=1;
     }
-    
-    f(i,0,m)
-        solve(0,i,-1,0);
-    pnd1(ans);
+    arr[1][1]=2;
 }
 
 int main(void)
 {
     init();
+    pnd2(solve(n,n),n*n);
     return 0;
 }
