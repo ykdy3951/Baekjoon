@@ -1,4 +1,11 @@
-from math import gcd
+def gcd(a, b):
+    if a < b:
+        a,b=b,a
+    while a % b:
+        a,b=b,a%b
+        if a < b:
+            a,b=b,a
+    return b
 
 for i in range(int(input())):
     s=0
