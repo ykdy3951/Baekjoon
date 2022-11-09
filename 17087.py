@@ -17,4 +17,4 @@ n,s=map(int,input().split())
 l=list(map(f,input().split()))
 while len(l) != 1:
     l.append(gcd(l.pop(),l.pop()))
-print(l[0])        
+print(l[0])
