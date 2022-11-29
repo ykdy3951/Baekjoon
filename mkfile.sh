@@ -28,6 +28,7 @@ using namespace std;
 #define st(v) sort(v.begin(), v.end())
 #define vt vector
 #define pr pair
+#define pii pair<int,int>
 #define pb push_back
 #define f(i, a, b) for (int i = a; i < b; i++)
 #define fe(i, a, b) for (int i = a; i <= b; i++)
