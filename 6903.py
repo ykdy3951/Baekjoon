@@ -1,0 +1,6 @@
+a=int(input())
+b=int(input())
+c=int(input())
+print((('*'+' '*b)*2+'*\n')*a,end='')
+print('*'*(2*b+3))
+print((' '*(b+1)+'*\n')*c,end='')
