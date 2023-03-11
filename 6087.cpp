@@ -80,21 +80,29 @@ void solve()
         }
 
         f(i, 0, 4) {
-
-            if(chk[direction] == i) continue;
-
-            int nx = dx[i] + coord.first, ny = dy[i] + coord.second, nc = c;
             
-            // 못가는 지역
-            if(nx < 0 || nx >= h || ny < 0 || ny >= w) continue;
-            if(m[nx][ny] == '*') continue;
+            int step_size = 1;
 
-            // 방향 바꾼 후 가려는 지역이 이미 낮은 cost로 지나갔을 경우 pass
-            if(direction != i) nc++;
-            if(nc > cost[nx][ny]) continue;
-            
-            cost[nx][ny] = nc;
-            pq.push({-nc, {i, {nx, ny}}});
+            while (true)
+            {
+                if(chk[direction] == i || direction == i) break;
+
+                int nx = step_size * dx[i] + coord.first, ny = step_size * dy[i] + coord.second, nc = c;
+                
+                // 못가는 지역
+                if(nx < 0 || nx >= h || ny < 0 || ny >= w) break;
+                if(m[nx][ny] == '*') break;
+
+                // 방향 바꾼 후 가려는 지역이 이미 낮은 cost로 지나갔을 경우 pass
+                if(direction != i) nc++;
+                
+                step_size++;
+                if(nc >= cost[nx][ny]) continue;
+                
+                cost[nx][ny] = nc;
+                pq.push({-nc, {i, {nx, ny}}});
+
+            }
         }
     }
 }
