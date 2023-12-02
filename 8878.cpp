@@ -1,160 +1,159 @@
-// #include <iostream>
-// #include <algorithm>
-// #include <vector>
-// #include <iomanip> 
-
-// using namespace std;
-
-// double p, x;
-
-// double arr[50001];
-
-// double f(int b, int c) {
-//     return (c-b*x/100) / (arr[c] - 1);
-// }
-
-// double e(int b, int c) {
-//     return f(b, c) * (arr[b] - 1) - b * (1-x/100);
-// }
-
-// int main(void) {
-
-//     ios_base::sync_with_stdio(0);
-//     cin.tie(0);
-//     cin >> x >> p;
-
-//     double _p = 100 - p;
-
-//     arr[0] = 1;
-//     for(int i = 1; i <= 50000; i++) 
-//     {
-//         arr[i] = arr[i-1] * _p / p;
-//     }
-
-//     int sb = 0, eb = 5000;
-//     while(eb-sb >= 3) {
-//         int mb1 = (sb * 2 + eb) / 3, mb2 = (sb + eb * 2) / 3;
-
-//         int sc = mb1, ec = 20530;
-//         while(ec - sc >= 3) {
-//             int mc1 = (sc * 2 + ec) / 3, mc2 = (sc + ec * 2) / 3;
-
-//             if (f(mb1, mc1) > f(mb1, mc2)) {
-//                 ec = mc2;
-//             }
-//             else {
-//                 sc = mc1;
-//             }
-//         }
-
-//         int c1 = 0;
-//         double r1 = 0;
-
-//         for(int i = sc; i <= ec; i++) {
-//             if (r1 < f(mb1, i)) {
-//                 r1 = f(mb1, i);
-//                 c1 = i;
-//             }
-//         }
-
-//         sc = mb2, ec = 20530;
-//         while(ec - sc >= 3) {
-//             int mc1 = (sc * 2 + ec) / 3, mc2 = (sc + ec * 2) / 3;
-
-//             if (f(mb2, mc1) > f(mb2, mc2)) {
-//                 ec = mc2;
-//             }
-//             else {
-//                 sc = mc1;
-//             }
-//         }
-
-//         int c2 = 0;
-//         double r2 = 0;
-
-//         for(int i = sc; i <= ec; i++) {
-//             if (r2 < f(mb2, i)) {
-//                 r2 = f(mb2, i);
-//                 c2 = i;
-//             }
-//         }
-
-//         if (e(mb1, c1) > e(mb2, c2)) {
-//             eb = mb2;
-//         }
-//         else {
-//             sb = mb1;
-//         }
-//     }
-
-//     double res = 0;
-//     int b = 0, c = 0;
-
-//     for(int i = sb; i <= eb; i++) {
-//         int sc = sb, ec = 20530;
-//         while (ec - sc >= 3) {
-//             int mc1 = (sc * 2 + ec) / 3, mc2 = (sc + ec * 2) / 3;
-
-//             if (f(i, mc1) > f(i, mc2)) {
-//                 ec = mc2;
-//             }
-//             else {
-//                 sc = mc1;
-//             }
-//         }
-
-//         for(int j = sc; j <= ec; j++) {
-//             if (res < e(i, j)) {
-//                 res = e(i, j);
-//                 b = i;
-//                 c = j;
-//             }
-//         }
-//     }
-
-//     cout << setprecision(10) << res << endl;
-
-//     return 0;
-// }
-
 #include <iostream>
-#include <cmath>
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <queue>
+#include <stack>
+#include <deque>
 
-double calculateProbability(double p, double x, int L, int W) {
-    double r = 1 - p;
-    double alpha = (r * W - r * L) / (1 - r * L);
-    double beta = (r * L - r * W) / (1 - r * L);
+using namespace std;
 
-    double P = alpha + beta * p;
+#define fio ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0)
+#define endl '\n'
+#define ll long long
+#define INF 987654321
+#define sc1(a) scanf("%c", &a)
+#define ss1(a) scanf("%s", s)
+#define sd1(a) scanf("%d", &a)
+#define sd2(a, b) scanf("%d %d", &a, &b)
+#define sd3(a, b, c) scanf("%d %d %d", &a, &b, &c)
+#define sd4(a, b, c, d) scanf("%d %d %d %d", &a, &b, &c, &d)
+#define sld1(a) scanf("%ld", &a)
+#define sld2(a, b) scanf("%ld %ld", &a, &b)
+#define slld1(a) scanf("%lld", &a)
+#define slld2(a, b) scanf("%lld %lld", &a, &b)
+#define pd1(a) printf("%d", a)
+#define psd1(a) printf("%d ", a)
+#define pnd1(a) printf("%d\n", a)
+#define plld1(a) printf("%lld", a)
+#define pslld1(a) printf("%lld ", a)
+#define pnlld1(a) printf("%lld\n", a)
+#define pd2(a, b) printf("%d %d", a, b)
+#define pnd2(a, b) printf("%d %d\n", a, b)
+#define st(v) sort(v.begin(), v.end())
+#define vt vector
+#define pr pair
+#define pii pair<int,int>
+#define pb push_back
+#define f(i, a, b) for (int i = a; i < b; i++)
+#define fe(i, a, b) for (int i = a; i <= b; i++)
 
-    return P;
+// (a+b*x')*((((1-p)/p)**b-1)/((1-p)/p)**a+b-1)-b*x'
+
+double x, p;
+double arr[80005];
+
+double pow_c(int n) 
+{
+    if (n == 0) return arr[0] = 1;
+    if (arr[n] != 0) {
+        return arr[n];
+    }
+    return arr[n] = pow_c(n-1) * (1-p) / p;
 }
 
-int main() {
-    double p;  // probability of winning each round
-    double x;  // precision
+double func(int a, int b) {
+    return (a+b*(1-x))*((pow_c(b)-1)/(pow_c(a+b)-1))-b*(1-x);
+}
 
-    std::cin >> x >> p;
+void solve()
+{
+    int start_a = 0, end_a = 40000;
 
-    int bestL = 0;
-    int bestW = 0;
-    double bestExpectedGain = 0.0;
+    while (end_a - start_a >= 3)
+    {
+        int mid1 = (2 * start_a + end_a) / 3;
+        int mid2 = (start_a + 2 * end_a) / 3;
 
-    for (int L = 0; L <= 20528; L++) {
-        for (int W = 0; W <= 2498; W++) {
-            double expectedGain = calculateProbability(p, x, L, W);
+        int start_b = 0, end_b = 40000;
+        while (end_b - start_b >= 3)
+        {
+            int mid3 = (2 * start_b + end_b) / 3;
+            int mid4 = (start_b + 2 * end_b) / 3;
 
-            if (expectedGain > bestExpectedGain) {
-                bestExpectedGain = expectedGain;
-                bestL = L;
-                bestW = W;
+            if (func(mid1, mid3) < func(mid1, mid4))
+            {
+                start_b = mid3;
             }
+            else
+            {
+                end_b = mid4;
+            }
+        }
+
+        double max_for_mid1 = max(func(mid1, start_b), max(func(mid1, start_b+1), func(mid1, start_b+2)));
+
+        start_b = 0, end_b = 40000;
+        while (end_b - start_b >= 3)
+        {
+            int mid3 = (2 * start_b + end_b) / 3;
+            int mid4 = (start_b + 2 * end_b) / 3;
+
+            if (func(mid2, mid3) < func(mid2, mid4))
+            {
+                start_b = mid3;
+            }
+            else
+            {
+                end_b = mid4;
+            }
+        }
+
+        double max_for_mid2 = max(func(mid2, start_b), max(func(mid2, start_b+1), func(mid2, start_b+2)));
+
+        if (max_for_mid1 < max_for_mid2)
+        {
+            start_a = mid1;
+        }
+        else
+        {
+            end_a = mid2;
         }
     }
 
-    std::cout << "Best L: " << bestL << std::endl;
-    std::cout << "Best W: " << bestW << std::endl;
-    std::cout << "Best expected gain: " << bestExpectedGain << std::endl;
+    double max_for_opt_a = 0;
 
+    for (int i = start_a; i <= end_a; i++)
+    {
+        int start_b = 0, end_b = 40000;
+        while (end_b - start_b >= 3)
+        {
+            int mid1 = (2 * start_b + end_b) / 3;
+            int mid2 = (start_b + 2 * end_b) / 3;
+
+            if (func(i, mid1) < func(i, mid2))
+            {
+                start_b = mid1;
+            }
+            else
+            {
+                end_b = mid2;
+            }
+        }
+
+        double max_for_mid = max(func(i, start_b), max(func(i, start_b+1), func(i, start_b+2)));
+
+        if (max_for_opt_a < max_for_mid)
+        {
+            max_for_opt_a = max_for_mid;
+        }
+    }
+
+    printf("%.3lf\n", max_for_opt_a);
+}
+
+void init()
+{
+    scanf("%lf %lf", &x, &p);
+    p /= 100;
+    x /= 100;
+    arr[0] = 1;
+    arr[1] = (1-p) / p;
+}
+
+int main(void)
+{
+    init();
+    solve();
     return 0;
 }
