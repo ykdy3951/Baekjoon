@@ -1,0 +1,1 @@
+print(*filter(lambda x:'S'in x,open(0)))
