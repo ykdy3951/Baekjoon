@@ -1,1 +1,1 @@
-a,*m=open(0);print(min(map(str(m).count,'01')))
+print(filter(lambda x:'S'in x,open(0)))
