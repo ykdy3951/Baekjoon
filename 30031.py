@@ -1,0 +1,1 @@
+print(sum(map(lambda x:[1,5,10,50][(int(x.split()[0])-136)//6], list(open(0))[1:]))*1000)
