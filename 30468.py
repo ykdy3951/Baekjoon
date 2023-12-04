@@ -1,0 +1,1 @@
+*a,n=map(int,input().split());print(max(n*4-sum(a),0))
