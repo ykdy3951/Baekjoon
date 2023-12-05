@@ -1,0 +1,1 @@
+i=input;i();a=int(i());print(sorted([*map(int,i().split())]+[a],reverse=True).index(a)+1)
