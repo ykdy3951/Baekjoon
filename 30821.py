@@ -1,0 +1,1 @@
+n=int(input());print(eval('*'.join(map(str,range(n-4,n+1))))//120)
