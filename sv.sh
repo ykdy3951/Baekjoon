@@ -1,1 +1,0 @@
-iverilog -g2012 $1.sv
