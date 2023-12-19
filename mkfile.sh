@@ -8,6 +8,6 @@ elif [ $extension = "py" ]; then
     ./mkfile_py.sh $boj_number
 elif [ $extension = "sv" ]; then
     ./mkfile_sv.sh $boj_number
-else;
+else
     touch $file
 fi
