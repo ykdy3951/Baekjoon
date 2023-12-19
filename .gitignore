@@ -1,5 +1,13 @@
+# Executable files
 a.out
 test
+
+# vscode files
 .vscode
+
+# test files
 output*
 input*
+
+# pycache
+__pycache__
