@@ -11,3 +11,5 @@ elif [ $extension = "sv" ]; then
 else
     touch $file
 fi
+
+code $file
