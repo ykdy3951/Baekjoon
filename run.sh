@@ -3,7 +3,7 @@ extension=`echo $file | cut -d '.' -f2`
 
 # cpp file
 if [ $extension = "cpp" ] || [ $extension = "cc" ]; then
-    g++ $file -o Main -O2 -Wall -lm -static -std=gnu++17 -DONLINE_JUDGE -DBOJ && ./Main && Main
+    g++ $file -o Main -O2 -Wall -lm -static -std=gnu++17 -DONLINE_JUDGE -DBOJ && ./Main && rm Main
 # c file
 elif [ $extension = "c" ]; then
     gcc $file -o Main -O2 -Wall -lm -static -std=gnu11 -DONLINE_JUDGE -DBOJ && ./Main && rm Main
