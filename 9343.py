@@ -12,7 +12,7 @@ def pow(a,b):
 
 fact=[1]*2_000_001
 
-for i in range(2,1_000_001):
+for i in range(2,2_000_001):
     fact[i]=fact[i-1]*i%MOD
 
 for _ in range(int(input())):
