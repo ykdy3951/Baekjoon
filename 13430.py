@@ -1,0 +1,1 @@
+import math;k,n=map(int,input().split());print(math.comb(n+k,k+1)%(10**9+7))
