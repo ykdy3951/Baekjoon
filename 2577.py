@@ -1,0 +1,1 @@
+print(*map(str(eval('int(input())*'*3+'1')).count,'0123456789'))
