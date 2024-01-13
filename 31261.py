@@ -1,0 +1,1 @@
+a,b=map(int,input().split());exec('b+=a;b*=a;'*2);print(b)
