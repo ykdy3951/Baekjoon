@@ -13,4 +13,7 @@ elif [ $extension = "py" ]; then
 # sv file
 elif [ $extension = "sv" ]; then
     iverilog -g2012 -o Main $file && vvp Main && rm Main
+# rs file
+elif [ $extension = "rs" ]; then
+    rustc --edition 2015 -O -o Main $file && ./Main && rm Main
 fi
